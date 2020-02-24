@@ -1,37 +1,46 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import EventDetails from "./EventDetails";
-import { getEvents } from "../../store/event/actions";
+import TicketList from "../TicketList/TicketList";
+import { fetchEvents } from "../../store/event/actions";
 // import { getEvent } from "../../store/event/actions";
+import { fetchTickets } from "../../store/ticket/actions";
 
 class EventDetailsContainer extends Component {
   componentDidMount() {
-    // const eventId = this.props.match.params.id;
-    // console.log(eventId);
-    // this.props.getEvent(eventId);
-    this.props.getEvents();
+    const currentId = Number(this.props.match.params.id);
+    this.props.fetchEvents();
+    // this.props.getEvent(currentId);
+    this.props.fetchTickets(currentId);
   }
 
   render() {
-    // console.log("this props from details?", this.props);
-
     const currentId = Number(this.props.match.params.id);
-    const currentEvent = this.props.events
-      ? this.props.events.find(event => event.id === currentId)
-      : "Loading event";
+    const currentEvent =
+      this.props.events && this.props.tickets
+        ? this.props.events.find(event => event.id === currentId)
+        : "Loading event";
 
     return (
       <div>
-        <EventDetails event={currentEvent} />
+        {this.props.events && this.props.tickets && (
+          <div>
+            <EventDetails event={currentEvent} />
+            <TicketList tickets={this.props.tickets} />
+            {/* <AddTicketForm /> */}
+          </div>
+        )}
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  // console.log("details state", state);
-  return { events: state.events };
+  // console.log("state???", state);
+  return { events: state.events, tickets: state.tickets };
+  // return { currentEvent: state.events, tickets: state.tickets };
 }
-
-// export default connect(mapStateToProps, { getEvent })(EventDetailsContainer);
-export default connect(mapStateToProps, { getEvents })(EventDetailsContainer);
+// export default connect(mapStateToProps, { getEvent, fetchTickets })(EventDetailsContainer);
+export default connect(mapStateToProps, { fetchEvents, fetchTickets })(
+  EventDetailsContainer
+);

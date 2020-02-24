@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import EventsList from "./EventsList";
-import { getEvents } from "../../store/event/actions";
+import { fetchEvents } from "../../store/event/actions";
 
 class EventsListContainer extends Component {
   componentDidMount() {
-    this.props.getEvents();
+    this.props.fetchEvents();
   }
 
   render() {
-    // console.log("this?", this.props.events);
+    // console.log("this props events eventsListContainer?", this.props.events);
     return (
       <div>
-        <EventsList events={this.props.events} />
+        {!this.props.events || (this.props.events.length === 0 && "Loading")}
+        {this.props.events && this.props.events.length > 0 && (
+          <EventsList events={this.props.events} />
+        )}
       </div>
     );
   }
@@ -23,4 +26,4 @@ function mapStateToProps(state) {
   return { events: state.events };
 }
 
-export default connect(mapStateToProps, { getEvents })(EventsListContainer);
+export default connect(mapStateToProps, { fetchEvents })(EventsListContainer);

@@ -1,9 +1,14 @@
 import React from "react";
 
-export default function TicketList() {
+export default function TicketList(props) {
   return (
     <div>
-      <h1>Tickets List</h1>
+      {props.tickets &&
+        props.tickets.map(ticket => (
+          <li key={ticket.id}>
+            {ticket.description} FOR {ticket.price}$
+          </li>
+        ))}
     </div>
   );
 }

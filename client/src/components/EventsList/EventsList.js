@@ -17,7 +17,7 @@ export default function EventsList(props) {
 
   return (
     <div>
-      Event List
+      <h1>Event List</h1>
       <ul>{eventList}</ul>
     </div>
   );

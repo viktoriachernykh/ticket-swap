@@ -1,4 +1,4 @@
-const initialState = null;
+const initialState = [];
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -7,8 +7,10 @@ export default function reducer(state = initialState, action) {
       return action.events;
     }
     // case "ONE_EVENT": {
-    //   // console.log("evenTTT in reducer?", action);
-    //   return action.event;
+    //   const allEvents = [...state];
+    //   const currentEvent = allEvents.find(event => event.id === action.id);
+    //   console.log("currentEvent in reducer?", currentEvent);
+    //   return currentEvent;
     // }
     default: {
       return state;
