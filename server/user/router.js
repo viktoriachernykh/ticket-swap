@@ -60,8 +60,15 @@ router.get("/user/:id", async (req, res, next) => {
 
 router.patch("/user/:id", async (req, res, next) => {
   const userId = req.params.id;
+  const { name, email, password, logo } = req.body;
   try {
-    await User.update(req.body, {
+    const user = {
+      name: name,
+      email: email,
+      password: bcrypt.hashSync(password, 10),
+      logo: logo
+    };
+    const updateUser = await User.update(user, {
       where: {
         id: userId
       }
@@ -74,6 +81,20 @@ router.patch("/user/:id", async (req, res, next) => {
         .end();
     }
     res.send(updatedUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/user/:id", async (req, res, next) => {
+  const userId = req.params.id;
+  try {
+    await User.destroy({
+      where: {
+        id: userId
+      }
+    });
+    res.send({ message: "User deleted" });
   } catch (error) {
     next(error);
   }
