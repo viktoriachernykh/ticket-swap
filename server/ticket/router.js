@@ -44,14 +44,14 @@ router.patch("/ticket/:id", async (req, res, next) => {
         id: ticketId
       }
     });
-    const updatedticket = await Ticket.findByPk(ticketId);
-    if (!updatedticket) {
+    const updatedTicket = await Ticket.findByPk(ticketId);
+    if (!updatedTicket) {
       res
         .status(404)
         .send({ message: "Ticket not found" })
         .end();
     }
-    res.send(updatedticket);
+    res.send(updatedTicket);
   } catch (error) {
     next(error);
   }
