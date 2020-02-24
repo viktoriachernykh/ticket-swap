@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import EventsListContainer from "./components/Home/EventsListContainer";
+import EventsListContainer from "./components/EventsList/EventsListContainer";
+import EventDetailsContainer from "./components/Event/EventDetailsContainer";
 
 class App extends Component {
   render() {
@@ -9,7 +10,8 @@ class App extends Component {
       <div>
         <Header />
         <Switch>
-          <Route path="/" component={EventsListContainer} />
+          <Route exact path="/" component={EventsListContainer} />
+          <Route path="/event/:id" component={EventDetailsContainer} />
         </Switch>
       </div>
     );

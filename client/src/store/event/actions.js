@@ -1,16 +1,14 @@
 import request from "superagent";
-export const ALL_EVENTS = "ALL_EVENTS";
 
 const baseUrl = "http://localhost:4000";
 
 function allEvents(events) {
   return {
-    type: ALL_EVENTS,
+    type: "ALL_EVENTS",
     events
   };
 }
 
-// export function getEvents(dispatch, getState) {
 export const getEvents = () => dispatch => {
   request(`${baseUrl}/event`)
     .then(response => {
@@ -19,3 +17,19 @@ export const getEvents = () => dispatch => {
     })
     .catch(console.error);
 };
+
+// function oneEvent(event) {
+//   return {
+//     type: "ONE_EVENT",
+//     event
+//   };
+// }
+
+// export const getEvent = id => dispatch => {
+//   request(`${baseUrl}/event/${id}`)
+//     .then(response => {
+//       // console.log("evenTTT in actions?", response.body);
+//       dispatch(oneEvent(response.body));
+//     })
+//     .catch(console.error);
+// };

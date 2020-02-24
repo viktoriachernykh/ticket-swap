@@ -1,14 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function EventsList(props) {
   // console.log("props?", props);
   const eventList = props.events
     ? props.events.map(event => (
-        <li key={event.id}>
-          <p>{event.title}</p>
-          <p>{event.description}</p>
-          {event.startDate} - {event.endDate}
-        </li>
+        <Link to={`/event/${event.id}`} key={event.id}>
+          <li>
+            <p>{event.title}</p>
+            <p>{event.description}</p>
+            {event.startDate} - {event.endDate}
+          </li>
+        </Link>
       ))
     : "Loading events";
 
