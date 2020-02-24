@@ -5,6 +5,7 @@ const port = process.env.PORT || 4000;
 
 const userRouter = require("./user/router");
 const eventRouter = require("./event/router");
+const ticketRouter = require("./ticket/router");
 
 function onListen() {
   console.log(`Listening on port ${port}`);
@@ -16,7 +17,7 @@ app.use(corsMiddleware);
 const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
-app.use(userRouter, eventRouter);
+app.use(userRouter, eventRouter, ticketRouter);
 
 app.get("/", (req, res) => res.send("Hello"));
 
