@@ -37,7 +37,12 @@ class EventDetailsContainer extends Component {
 
 function mapStateToProps(state) {
   // console.log("state???", state);
-  return { events: state.events, tickets: state.tickets };
+  return {
+    events: state.events,
+    tickets: state.tickets,
+    user: state.session.user,
+    token: state.session.jwt
+  };
   // return { currentEvent: state.events, tickets: state.tickets };
 }
 // export default connect(mapStateToProps, { getEvent, fetchTickets })(EventDetailsContainer);

@@ -19,6 +19,7 @@ export default function EventsList(props) {
     <div>
       <h1>Event List</h1>
       <ul>{eventList}</ul>
+      {/* <AddEventForm /> */}
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
-// import users from "./user/reducer";
+import user from "./user/reducer.js";
 import events from "./event/reducer";
 import tickets from "./ticket/reducer";
 // import comments from "./comment/reducer";
 
 export default combineReducers({
-  // users,
+  session: user,
   events,
   tickets
   // comments

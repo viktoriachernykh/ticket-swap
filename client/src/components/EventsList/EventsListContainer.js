@@ -14,7 +14,11 @@ class EventsListContainer extends Component {
       <div>
         {!this.props.events || (this.props.events.length === 0 && "Loading")}
         {this.props.events && this.props.events.length > 0 && (
-          <EventsList events={this.props.events} />
+          <EventsList
+            events={this.props.events}
+            user={this.props.user}
+            token={this.props.token}
+          />
         )}
       </div>
     );
@@ -23,7 +27,11 @@ class EventsListContainer extends Component {
 
 function mapStateToProps(state) {
   // console.log("state", state);
-  return { events: state.events };
+  return {
+    events: state.events,
+    user: state.session.user,
+    token: state.session.jwt
+  };
 }
 
 export default connect(mapStateToProps, { fetchEvents })(EventsListContainer);
