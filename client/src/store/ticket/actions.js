@@ -2,12 +2,12 @@ import request from "superagent";
 
 const baseUrl = "http://localhost:4000";
 
-export const fetchTickets = thisEventId => dispatch => {
+export const fetchTickets = currentEventId => dispatch => {
   request(`${baseUrl}/ticket`)
     .then(response => {
       const allTickets = response.body;
       const currentEventTickets = allTickets.filter(
-        ticket => ticket.eventId === thisEventId
+        ticket => ticket.eventId === currentEventId
       );
       dispatch(ticketsFetched(currentEventTickets));
     })

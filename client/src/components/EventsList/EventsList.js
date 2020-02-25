@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function EventsList(props) {
   // console.log("props?", props);
-  const eventList = props.events
+  const eventsList = props.events
     ? props.events.map(event => (
         <Link to={`/event/${event.id}`} key={event.id}>
           <li>
@@ -17,8 +17,8 @@ export default function EventsList(props) {
 
   return (
     <div>
-      <h1>Event List</h1>
-      <ul>{eventList}</ul>
+      <h1>Events List</h1>
+      <ul>{eventsList}</ul>
     </div>
   );
 }

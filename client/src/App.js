@@ -6,6 +6,7 @@ import EventDetailsContainer from "./components/EventDetails/EventDetailsContain
 import SignupFormContainer from "./components/Signup/SignupFormContainer";
 import LoginFormContainer from "./components/Login/LoginFormContainer";
 import Logout from "./components/Logout/Logout";
+import TicketDetailsContainer from "./components/TicketDetails/TicketDetailsContainer";
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
           <Route exact path="/signup" component={SignupFormContainer} />
           <Route exact path="/logout" component={Logout} />
           <Route path="/event/:id" component={EventDetailsContainer} />
+          <Route path="/ticket/:id" component={TicketDetailsContainer} />
         </Switch>
       </div>
     );

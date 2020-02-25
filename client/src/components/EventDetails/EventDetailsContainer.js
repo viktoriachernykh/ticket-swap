@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import EventDetails from "./EventDetails";
-import TicketList from "../TicketList/TicketList";
+import TicketsList from "../TicketsList/TicketsList";
 import { fetchEvents } from "../../store/event/actions";
 // import { getEvent } from "../../store/event/actions";
 import { fetchTickets } from "../../store/ticket/actions";
@@ -27,7 +27,7 @@ class EventDetailsContainer extends Component {
         {this.props.events && this.props.tickets && (
           <div>
             <EventDetails event={currentEvent} />
-            <TicketList tickets={this.props.tickets} />
+            <TicketsList tickets={this.props.tickets} />
             {this.props.token && (
               <AddEventTicketContainer event={currentEvent} />
             )}
