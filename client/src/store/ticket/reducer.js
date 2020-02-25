@@ -6,6 +6,9 @@ export default function reducer(state = initialState, action) {
       // console.log("tickets in reducer?", action);
       return action.tickets;
     }
+    case "ADD_TICKET": {
+      return [...state, action.newTicket];
+    }
     default: {
       return state;
     }

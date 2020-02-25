@@ -5,6 +5,7 @@ import TicketList from "../TicketList/TicketList";
 import { fetchEvents } from "../../store/event/actions";
 // import { getEvent } from "../../store/event/actions";
 import { fetchTickets } from "../../store/ticket/actions";
+import AddEventTicketContainer from "../AddTicket/AddTicketFormContainer";
 
 class EventDetailsContainer extends Component {
   componentDidMount() {
@@ -27,7 +28,9 @@ class EventDetailsContainer extends Component {
           <div>
             <EventDetails event={currentEvent} />
             <TicketList tickets={this.props.tickets} />
-            {/* <AddTicketForm /> */}
+            {this.props.token && (
+              <AddEventTicketContainer event={currentEvent} />
+            )}
           </div>
         )}
       </div>

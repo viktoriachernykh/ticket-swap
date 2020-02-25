@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import EventsListContainer from "./components/EventsList/EventsListContainer";
-import EventDetailsContainer from "./components/Event/EventDetailsContainer";
+import EventDetailsContainer from "./components/EventDetails/EventDetailsContainer";
 import SignupFormContainer from "./components/Signup/SignupFormContainer";
 import LoginFormContainer from "./components/Login/LoginFormContainer";
 import Logout from "./components/Logout/Logout";
