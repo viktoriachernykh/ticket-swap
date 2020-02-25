@@ -26,8 +26,8 @@ export const signup = (name, email, password, logo) => {
     request
       .post(`${baseUrl}/user`)
       .send(data)
-      .then(response => {
-        dispatch(signupSuccess(response.body));
+      .then(res => {
+        dispatch(signupSuccess(res.body));
       })
       .catch(console.error);
   };

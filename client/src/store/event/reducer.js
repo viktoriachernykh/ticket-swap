@@ -6,6 +6,10 @@ export default function reducer(state = initialState, action) {
       // console.log("events in reducer?", action);
       return action.events;
     }
+    case "ADD_EVENT": {
+      // console.log("event in reducer?", action);
+      return [...state, action.newEvent];
+    }
     // case "ONE_EVENT": {
     //   const allEvents = [...state];
     //   const currentEvent = allEvents.find(event => event.id === action.id);

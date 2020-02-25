@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import EventsList from "./EventsList";
 import { fetchEvents } from "../../store/event/actions";
+import AddEventFormContainer from "../AddEvent/AddEventFormContainer";
 
 class EventsListContainer extends Component {
   componentDidMount() {
@@ -14,11 +15,14 @@ class EventsListContainer extends Component {
       <div>
         {!this.props.events || (this.props.events.length === 0 && "Loading")}
         {this.props.events && this.props.events.length > 0 && (
-          <EventsList
-            events={this.props.events}
-            user={this.props.user}
-            token={this.props.token}
-          />
+          <div>
+            <EventsList
+              events={this.props.events}
+              user={this.props.user}
+              token={this.props.token}
+            />
+            {this.props.token && <AddEventFormContainer />}
+          </div>
         )}
       </div>
     );
