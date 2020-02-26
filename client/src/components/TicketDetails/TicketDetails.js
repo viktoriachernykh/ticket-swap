@@ -5,11 +5,20 @@ export default function TicketDetails(props) {
     <div>
       {props.ticket && (
         <div>
-          Ticket details
-          <h1>Ticket: {props.ticket.title}</h1>
+          {/* <h3>Ticket details</h3> */}
+          <p>
+            Ticket for event: {props.event.title}, {props.event.startDate}-
+            {props.event.endDate}
+          </p>
+          <p>Posted by {props.author.name}</p>
+
+          <p>Ticket Description: {props.ticket.description}</p>
           <h2>Price: {props.ticket.price}</h2>
-          <p>Description: {props.ticket.description}</p>
           {/* <img src={props.ticket.picture} alt="ticket picture" /> */}
+          {/* <h2>
+            Risk: We calculated that the risk of this ticket being a fraud is
+            XX%
+          </h2> */}
         </div>
       )}
       {!props.ticket && "Loading ticket"}

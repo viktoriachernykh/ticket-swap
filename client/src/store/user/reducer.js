@@ -12,7 +12,6 @@ export default function(state = initialState, action = {}) {
       };
     }
     case "LOGIN_SESSION": {
-      // console.log("action", action);
       return {
         ...state,
         jwt: action.payload.jwt,

@@ -1,35 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import EventDetails from "./EventDetails";
 import TicketsList from "../TicketsList/TicketsList";
-import { fetchEvents } from "../../store/event/actions";
-// import { getEvent } from "../../store/event/actions";
-import { fetchTickets } from "../../store/ticket/actions";
-import AddEventTicketContainer from "../AddTicket/AddTicketFormContainer";
+import AddTicketFormContainer from "../AddTicket/AddTicketFormContainer";
 
 class EventDetailsContainer extends Component {
-  componentDidMount() {
-    const currentId = Number(this.props.match.params.id);
-    this.props.fetchEvents();
-    // this.props.getEvent(currentId);
-    this.props.fetchTickets(currentId);
-  }
-
   render() {
     const currentId = Number(this.props.match.params.id);
+
     const currentEvent =
-      this.props.events && this.props.tickets
-        ? this.props.events.find(event => event.id === currentId)
-        : "Loading event";
+      this.props.events &&
+      this.props.events.find(event => event.id === currentId);
+
+    const currentEventTickets =
+      this.props.tickets &&
+      this.props.tickets.filter(ticket => ticket.eventId === currentId);
+
+    const currentEventAuthor =
+      this.props.users &&
+      this.props.users.find(user => user.id === currentEvent.userId);
 
     return (
       <div>
         {this.props.events && this.props.tickets && (
           <div>
-            <EventDetails event={currentEvent} />
-            <TicketsList tickets={this.props.tickets} />
+            <EventDetails event={currentEvent} author={currentEventAuthor} />
+            <TicketsList tickets={currentEventTickets} />
             {this.props.token && (
-              <AddEventTicketContainer event={currentEvent} />
+              <AddTicketFormContainer event={currentEvent} />
             )}
           </div>
         )}
@@ -39,16 +38,12 @@ class EventDetailsContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log("state???", state);
   return {
     events: state.events,
     tickets: state.tickets,
+    users: state.users,
     user: state.session.user,
     token: state.session.jwt
   };
-  // return { currentEvent: state.events, tickets: state.tickets };
 }
-// export default connect(mapStateToProps, { getEvent, fetchTickets })(EventDetailsContainer);
-export default connect(mapStateToProps, { fetchEvents, fetchTickets })(
-  EventDetailsContainer
-);
+export default connect(mapStateToProps)(EventDetailsContainer);

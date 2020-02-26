@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import { addTicket } from "../../store/ticket/actions";
+
 import AddTicketForm from "./AddTicketForm";
 
-class AddEventTicketContainer extends React.Component {
+class AddTicketFormContainer extends React.Component {
   state = {
     description: "",
     price: "",
@@ -11,8 +13,8 @@ class AddEventTicketContainer extends React.Component {
   };
 
   onSubmit = event => {
-    // console.log("props.event", this.props.event.id);
     const token = this.props.token;
+
     const newTicket = {
       description: this.state.description,
       price: this.state.price,
@@ -20,7 +22,7 @@ class AddEventTicketContainer extends React.Component {
       userId: this.props.user.id,
       eventId: this.props.event.id
     };
-    // console.log(newTicket, token); // { description price picture } , jwt
+
     event.preventDefault();
     this.props.addTicket(newTicket, token);
 
@@ -30,6 +32,7 @@ class AddEventTicketContainer extends React.Component {
       picture: ""
     });
   };
+
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -51,11 +54,10 @@ class AddEventTicketContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  // console.log("add ticket state", state); // session.jwt, session.user, events, tickets
   return {
     user: { ...state.session.user },
     token: state.session.jwt
   };
 }
 
-export default connect(mapStateToProps, { addTicket })(AddEventTicketContainer);
+export default connect(mapStateToProps, { addTicket })(AddTicketFormContainer);

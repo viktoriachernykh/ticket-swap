@@ -8,12 +8,6 @@ export function logout() {
   };
 }
 
-function signupSuccess(payload) {
-  return {
-    type: "NEW_USER",
-    payload
-  };
-}
 export const signup = (name, email, password, logo) => {
   // console.log(name, email, password, logo);
   return dispatch => {
@@ -32,16 +26,13 @@ export const signup = (name, email, password, logo) => {
       .catch(console.error);
   };
 };
-
-function loginSuccess(jwt, user) {
+function signupSuccess(payload) {
   return {
-    type: "LOGIN_SESSION",
-    payload: {
-      jwt,
-      user
-    }
+    type: "NEW_USER",
+    payload
   };
 }
+
 export const login = (email, password) => dispatch => {
   const data = {
     email: email,
@@ -58,3 +49,12 @@ export const login = (email, password) => dispatch => {
     })
     .catch(console.error);
 };
+function loginSuccess(jwt, user) {
+  return {
+    type: "LOGIN_SESSION",
+    payload: {
+      jwt,
+      user
+    }
+  };
+}
