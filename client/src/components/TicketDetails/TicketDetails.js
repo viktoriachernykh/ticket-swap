@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function TicketDetails(props) {
   return (
@@ -6,10 +7,14 @@ export default function TicketDetails(props) {
       {props.ticket && (
         <div>
           {/* <h3>Ticket details</h3> */}
+
           <p>
-            Ticket for event: {props.event.title}, {props.event.startDate}-
-            {props.event.endDate}
+            Ticket for event:{" "}
+            <Link to={`/event/${props.event.id}`} key={props.event.id}>
+              {props.event.title}, {props.event.startDate}-{props.event.endDate}{" "}
+            </Link>
           </p>
+
           <p>Posted by {props.author.name}</p>
 
           <p>Ticket Description: {props.ticket.description}</p>

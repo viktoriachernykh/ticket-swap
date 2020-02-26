@@ -1,14 +1,20 @@
 import React from "react";
-import CommentsDetails from "./CommentDetails";
 
 export default function CommentsList(props) {
   // console.log("comments props", props);
-  const commentsList = props.comments
-    ? props.comments.map(comment => (
-        <CommentsDetails comment={comment} key={comment.id} />
-      ))
-    : "Loading comments";
 
+  const commentsList =
+    props.comments &&
+    props.comments.map(comment => {
+      const commentAuthor = props.users.find(
+        user => user.id === comment.userId
+      );
+      return (
+        <p key={comment.id}>
+          {commentAuthor.name} wrote: {comment.text}
+        </p>
+      );
+    });
   return (
     <div>
       <h1>Comments List</h1>

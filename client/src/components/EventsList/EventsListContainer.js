@@ -18,7 +18,7 @@ class EventsListContainer extends Component {
   render() {
     return (
       <div>
-        {!this.props.events || (this.props.events.length === 0 && "Loading")}
+        {/* {!this.props.events || (this.props.events.length === 0 && "Loading")} */}
         {this.props.events && this.props.events.length > 0 && (
           <div>
             <EventsList
@@ -35,7 +35,6 @@ class EventsListContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log("state", state);
   return {
     events: state.events,
     tickets: state.tickets,
