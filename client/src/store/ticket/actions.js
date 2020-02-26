@@ -5,34 +5,16 @@ const baseUrl = "http://localhost:4000";
 export const fetchTickets = () => dispatch => {
   request(`${baseUrl}/ticket`)
     .then(response => {
-      dispatch(allTicketsFetched(response.body));
+      dispatch(ticketsFetched(response.body));
     })
     .catch(console.error);
 };
-function allTicketsFetched(tickets) {
+function ticketsFetched(tickets) {
   return {
     type: "ALL_TICKETS",
     tickets
   };
 }
-
-// export const fetchTickets = currentEventId => dispatch => {
-//   request(`${baseUrl}/ticket`)
-//     .then(response => {
-//       const allTickets = response.body;
-//       const currentEventTickets = allTickets.filter(
-//         ticket => ticket.eventId === currentEventId
-//       );
-//       dispatch(ticketsFetched(currentEventTickets));
-//     })
-//     .catch(console.error);
-// };
-// function ticketsFetched(tickets) {
-//   return {
-//     type: "CURRENT_EVENT_TICKETS",
-//     tickets
-//   };
-// }
 
 export const addTicket = (newTicket, token) => dispatch => {
   request
@@ -48,5 +30,21 @@ function ticketAdded(newTicket) {
   return {
     type: "ADD_TICKET",
     newTicket
+  };
+}
+
+export const editTicket = (currentTicket, ticketId) => dispatch => {
+  request
+    .patch(`${baseUrl}/ticket/${ticketId}`)
+    .send(currentTicket)
+    .then(res => {
+      dispatch(eventEdited(res.body));
+    })
+    .catch(console.error);
+};
+function eventEdited(editedTicket) {
+  return {
+    type: "EDIT_TICKET",
+    editedTicket
   };
 }

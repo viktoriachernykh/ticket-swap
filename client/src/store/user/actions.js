@@ -9,7 +9,6 @@ export function logout() {
 }
 
 export const signup = (name, email, password, logo) => {
-  // console.log(name, email, password, logo);
   return dispatch => {
     const data = {
       name: name,
@@ -42,7 +41,6 @@ export const login = (email, password) => dispatch => {
     .post(`${baseUrl}/login`)
     .send(data)
     .then(response => {
-      // console.log(response);
       const jwt = response.body.jwt;
       const user = response.body.userData;
       dispatch(loginSuccess(jwt, user));

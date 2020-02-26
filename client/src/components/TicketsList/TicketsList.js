@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// export default class TicketsList extends Component {
 export default function TicketsList(props) {
   const ticketsList = props.tickets
     ? props.tickets.map(ticket => (
@@ -11,7 +12,6 @@ export default function TicketsList(props) {
         </Link>
       ))
     : "Loading tickets";
-
   return (
     <div>
       <h1>Tickets List</h1>

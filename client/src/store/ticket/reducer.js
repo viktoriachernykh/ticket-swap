@@ -5,12 +5,14 @@ export default function reducer(state = initialState, action) {
     case "ALL_TICKETS": {
       return action.tickets;
     }
-    // case "CURRENT_EVENT_TICKETS": {
-    //   // console.log("tickets in reducer?", action);
-    //   return action.tickets;
-    // }
     case "ADD_TICKET": {
       return [...state, action.newTicket];
+    }
+    case "EDIT_TICKET": {
+      const newState = [...state].map(event =>
+        event.id === action.editedTicket.id ? action.editedTicket : event
+      );
+      return newState;
     }
     default: {
       return state;

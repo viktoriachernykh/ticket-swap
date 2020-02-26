@@ -6,27 +6,38 @@ import { fetchComments } from "../../store/comment/actions";
 import TicketDetails from "./TicketDetails";
 import CommentsList from "../CommentsList/CommentsList";
 import AddCommentFormContainer from "../AddComment/AddCommentFormContainer";
+import EditTicketFormContainer from "../EditTicket/EditTicketFormContainer";
 
 class TicketDetailsContainer extends Component {
+  state = {
+    toggle: false
+  };
   componentDidMount() {
     const currentId = Number(this.props.match.params.id);
     this.props.fetchComments(currentId);
   }
 
+  toggleEditForm = () => {
+    // console.log("toggled!", this.state.toggle);
+    this.setState({
+      toggle: !this.state.toggle
+    });
+  };
+
   render() {
     const currentId = Number(this.props.match.params.id);
 
-    const currentTicket =
-      // this.props.tickets &&
-      this.props.tickets.find(ticket => ticket.id === currentId);
+    const currentTicket = this.props.tickets.find(
+      ticket => ticket.id === currentId
+    );
 
-    const currentTicketEvent =
-      // this.props.events &&
-      this.props.events.find(event => event.id === currentTicket.eventId);
+    const currentTicketEvent = this.props.events.find(
+      event => event.id === currentTicket.eventId
+    );
 
-    const currentTicketAuthor =
-      // this.props.users &&
-      this.props.users.find(user => user.id === currentTicket.userId);
+    const currentTicketAuthor = this.props.users.find(
+      user => user.id === currentTicket.userId
+    );
 
     let risk = 5;
 
@@ -54,17 +65,30 @@ class TicketDetailsContainer extends Component {
     );
     sameAuthorTickets.length === 1 && (risk += 10);
 
-    // console.log(sameAuthorTickets);
-    // console.log(percentageDifference);
-    // console.log(avgPrice);
+    const time = new Date(currentTicket.createdAt);
+    const hours = time.getHours();
+    hours >= 9 && hours <= 17 ? (risk -= 10) : (risk += 10);
 
-    console.log(currentTicket.createdAt);
     risk < 5 && (risk = 5);
     risk > 95 && (risk = 95);
 
+    // console.log(sameAuthorTickets);
+    // console.log("percentageDifference", percentageDifference);
+    // console.log("avgPrice", avgPrice);
+    // console.log("hours", hours);
+
+    let color;
+    risk < 30
+      ? (color = "green")
+      : risk < 60
+      ? (color = "orange")
+      : (color = "red");
+
+    // console.log("color", color);
+
     return (
       <div>
-        <h2>
+        <h2 style={{ color: color }}>
           Risk: We calculated that the risk of this ticket being a fraud is{" "}
           {risk}%
         </h2>
@@ -73,6 +97,15 @@ class TicketDetailsContainer extends Component {
           event={currentTicketEvent}
           author={currentTicketAuthor}
         />
+        {this.props.user.id === currentTicket.userId && (
+          <button onClick={() => this.toggleEditForm()}>Edit ticket!</button>
+        )}
+        {this.state.toggle && (
+          <EditTicketFormContainer
+            ticket={currentTicket}
+            toggleForm={this.toggleEditForm}
+          />
+        )}
         We have {this.props.comments.length} comments!
         <CommentsList comments={this.props.comments} users={this.props.users} />
         {this.props.token && <AddCommentFormContainer ticket={currentTicket} />}

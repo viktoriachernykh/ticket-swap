@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function TicketDetails(props) {
+  // console.log(props);
+
   return (
     <div>
       {props.ticket && (
         <div>
           {/* <h3>Ticket details</h3> */}
-
           <p>
             Ticket for event:{" "}
             <Link to={`/event/${props.event.id}`} key={props.event.id}>

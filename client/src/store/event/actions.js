@@ -32,13 +32,3 @@ function eventAdded(newEvent) {
     newEvent
   };
 }
-// function oneEvent(id) {
-//   return {
-//     type: "ONE_EVENT",
-//     id
-//   };
-// }
-
-// export const getEvent = id => dispatch => {
-//   dispatch(oneEvent(id));
-// };
