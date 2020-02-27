@@ -62,10 +62,8 @@ class TicketLink extends Component {
     return (
       <div>
         <Link to={`/ticket/${currentTicket.id}`} style={{ color: color }}>
-          <li>
-            {currentTicket.description} FOR {currentTicket.price}$ / risk ={" "}
-            {risk}%
-          </li>
+          {currentTicket.description} FOR {currentTicket.price}$ / risk = {risk}
+          %
         </Link>
       </div>
     );

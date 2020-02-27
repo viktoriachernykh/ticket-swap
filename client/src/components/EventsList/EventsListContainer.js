@@ -10,13 +10,19 @@ import EventsList from "./EventsList";
 import AddEventFormContainer from "../AddEvent/AddEventFormContainer";
 
 class EventsListContainer extends Component {
-  state = { page: 1 };
+  state = { page: 1, toggle: false };
 
   componentDidMount() {
     this.props.fetchEvents();
     this.props.fetchUsers();
     this.props.fetchTickets();
   }
+
+  toggleAddEventForm = () => {
+    this.setState({
+      toggle: !this.state.toggle
+    });
+  };
 
   prevPage = () => {
     this.state.page > 1 && this.setState({ page: this.state.page - 1 });
@@ -27,9 +33,11 @@ class EventsListContainer extends Component {
     this.props.events[nextPageFirstEvent] &&
       this.setState({ page: this.state.page + 1 });
   };
+
   toFirstPage = () => {
     this.setState({ page: 1 });
   };
+
   render() {
     const eventsPerPage = 9;
     const now = new Date();
@@ -38,35 +46,45 @@ class EventsListContainer extends Component {
     const notFinishedEvents = this.props.events.filter(
       event => now < new Date(event.endDate)
     );
-    // console.log("notFinishedEvents", notFinishedEvents);
 
     this.state.page === 1
       ? (eventsDisplayed = notFinishedEvents.slice(0, eventsPerPage))
       : (eventsDisplayed = notFinishedEvents.slice(
           (Number(this.state.page) - 1) * 9,
-          eventsPerPage * Number(this.state.page) - 1
+          eventsPerPage * Number(this.state.page)
         ));
 
     return (
       <div>
-        {/* {!this.props.events || (this.props.events.length === 0 && "Loading")} */}
-        {this.props.events && this.props.events.length > 0 && (
-          <div>
-            <EventsList
-              events={eventsDisplayed}
-              // events={this.props.events}
-              user={this.props.user}
-              token={this.props.token}
-            />
-            <Link to={"/"} onClick={this.toFirstPage}>
-              1page
-            </Link>
-            <button onClick={this.prevPage}>prev page</button>
-            {this.state.page}
-            <button onClick={this.nextPage}>next page</button>
-            {this.props.token && <AddEventFormContainer />}
+        <div>
+          <h1>We have {notFinishedEvents.length} events!</h1>
+          {this.props.token && (
+            <button onClick={this.toggleAddEventForm}>Add event</button>
+          )}
+          {this.state.toggle && <AddEventFormContainer />}
+          <EventsList
+            className="eventList"
+            events={eventsDisplayed}
+            user={this.props.user}
+            token={this.props.token}
+          />
+          <div className="pages">
+            {this.state.page !== 1 && (
+              <button className="pages">
+                <Link to={"/"} onClick={this.toFirstPage}>
+                  <b>1</b>
+                </Link>
+              </button>
+            )}
+            <button onClick={this.prevPage} className="pages">
+              <b>prev</b>
+            </button>
+            <b>{this.state.page}</b>
+            <button onClick={this.nextPage} className="pages">
+              <b>next</b>
+            </button>
           </div>
-        )}
+        </div>
       </div>
     );
   }

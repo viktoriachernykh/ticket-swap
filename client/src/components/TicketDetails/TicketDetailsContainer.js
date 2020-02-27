@@ -83,26 +83,26 @@ class TicketDetailsContainer extends Component {
 
     return (
       <div>
-        <h2>
-          Risk: We calculated that the risk of this ticket being a fraud is{" "}
-          <b style={{ color: color }}>{risk}%</b>
-        </h2>
         <TicketDetails
           ticket={currentTicket}
           event={currentTicketEvent}
           author={currentTicketAuthor}
-          // comments={currentTicketComments}
         />
+        <p>
+          Risk: We calculated that the risk of this ticket being a fraud is{" "}
+          <b style={{ color: color }}>{risk}%</b>
+        </p>
         {this.props.user.id === currentTicket.userId && (
-          <button onClick={() => this.toggleEditForm()}>Edit ticket!</button>
+          <button onClick={() => this.toggleEditForm()}>Edit ticket?</button>
         )}
+        <br />
         {this.state.toggle && (
           <EditTicketFormContainer
             ticket={currentTicket}
             toggleForm={this.toggleEditForm}
           />
         )}
-        We have {currentTicketComments.length} comments!
+        <h2>{currentTicketComments.length} comments for this ticket:</h2>
         <CommentsList
           comments={currentTicketComments}
           users={this.props.users}

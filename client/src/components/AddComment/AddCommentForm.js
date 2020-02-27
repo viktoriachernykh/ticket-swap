@@ -4,7 +4,7 @@ export default function AddTicketForm(props) {
   return (
     <div>
       <form onSubmit={event => props.onSubmit(event)}>
-        Leave your comment:
+        <h2>Add your comment:</h2>
         <input
           type="text"
           name="text"

@@ -34,7 +34,6 @@ class AddCommentFormContainer extends React.Component {
   render() {
     return (
       <div>
-        <h1>Add new comment</h1>
         <AddCommentForm
           onSubmit={this.onSubmit}
           onChange={this.onChange}

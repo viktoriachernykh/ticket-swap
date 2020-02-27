@@ -10,16 +10,19 @@ export default function EventDetails(props) {
     <div>
       {props.event && (
         <div>
-          <p>Title: {props.event.title}</p>
-          <p>Description: {props.event.description}</p>
+          {props.event.picture ? (
+            <img src={props.event.picture} alt="event" />
+          ) : (
+            <img src={`/img/a${props.event.id}.jpg`} alt="event" />
+          )}
+          <h2>{props.event.title}</h2>
+          <p>{props.event.description}</p>
           <p>
-            Date: {startDate} - {endDate}
+            {startDate} - {endDate}
           </p>
-          <p>Event created by: {props.author.name}</p>
-          {/* <img src={props.event.picture} alt="event picture" /> */}
+          <em>Created by: {props.author.name}</em>
         </div>
       )}
-      {!props.event && "Loading event"}
     </div>
   );
 }

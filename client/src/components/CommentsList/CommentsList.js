@@ -9,13 +9,12 @@ export default function CommentsList(props) {
       );
       return (
         <p key={comment.id}>
-          {commentAuthor.name} wrote: {comment.text}
+          <b>{commentAuthor.name}:</b> {comment.text}
         </p>
       );
     });
   return (
     <div>
-      <h1>Comments List</h1>
       <ul>{commentsList}</ul>
     </div>
   );

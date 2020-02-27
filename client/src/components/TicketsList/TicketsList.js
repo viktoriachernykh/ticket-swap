@@ -10,7 +10,7 @@ class TicketsList extends Component {
 
     return (
       <div>
-        <h1>Tickets List</h1>
+        <h1>We have {ticketsList.length} tickets!</h1>
         <ul>{ticketsList}</ul>
       </div>
     );

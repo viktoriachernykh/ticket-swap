@@ -47,7 +47,6 @@ class AddEventFormContainer extends React.Component {
   render() {
     return (
       <div>
-        <h1>Add new event</h1>
         <AddEventForm
           onSubmit={this.onSubmit}
           onChange={this.onChange}
