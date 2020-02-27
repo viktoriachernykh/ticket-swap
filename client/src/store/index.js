@@ -4,11 +4,6 @@ import ReduxThunk from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist"; // session
 import storage from "redux-persist/lib/storage"; // session
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// const enhancer = composeEnhancers(applyMiddleware(ReduxThunk));
-// const store = createStore(reducer, enhancer);
-// export default store;
-
 const persistConfig = {
   key: "root",
   storage
