@@ -52,19 +52,18 @@ class EventsListContainer extends Component {
         {/* {!this.props.events || (this.props.events.length === 0 && "Loading")} */}
         {this.props.events && this.props.events.length > 0 && (
           <div>
-            <Link to={"/"} onClick={this.toFirstPage}>
-              Home
-            </Link>
-
-            <button onClick={this.prevPage}>prev page</button>
-            <p>{this.state.page}</p>
-            <button onClick={this.nextPage}>next page</button>
             <EventsList
               events={eventsDisplayed}
               // events={this.props.events}
               user={this.props.user}
               token={this.props.token}
             />
+            <Link to={"/"} onClick={this.toFirstPage}>
+              1page
+            </Link>
+            <button onClick={this.prevPage}>prev page</button>
+            {this.state.page}
+            <button onClick={this.nextPage}>next page</button>
             {this.props.token && <AddEventFormContainer />}
           </div>
         )}
