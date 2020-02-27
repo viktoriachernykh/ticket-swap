@@ -10,15 +10,15 @@ class EventDetailsContainer extends Component {
     const currentId = Number(this.props.match.params.id);
 
     const currentEvent =
-      this.props.events &&
+      // this.props.events &&
       this.props.events.find(event => event.id === currentId);
 
     const currentEventTickets =
-      this.props.tickets &&
+      // this.props.tickets &&
       this.props.tickets.filter(ticket => ticket.eventId === currentId);
 
     const currentEventAuthor =
-      this.props.users &&
+      // this.props.users &&
       this.props.users.find(user => user.id === currentEvent.userId);
 
     return (
@@ -26,7 +26,10 @@ class EventDetailsContainer extends Component {
         {this.props.events && this.props.tickets && (
           <div>
             <EventDetails event={currentEvent} author={currentEventAuthor} />
-            <TicketsList tickets={currentEventTickets} />
+            <TicketsList
+              event={currentEvent}
+              currentTickets={currentEventTickets}
+            />
             {this.props.token && (
               <AddTicketFormContainer event={currentEvent} />
             )}

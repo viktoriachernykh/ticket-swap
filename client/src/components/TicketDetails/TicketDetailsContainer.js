@@ -18,7 +18,6 @@ class TicketDetailsContainer extends Component {
   }
 
   toggleEditForm = () => {
-    // console.log("toggled!", this.state.toggle);
     this.setState({
       toggle: !this.state.toggle
     });
@@ -72,11 +71,6 @@ class TicketDetailsContainer extends Component {
     risk < 5 && (risk = 5);
     risk > 95 && (risk = 95);
 
-    // console.log(sameAuthorTickets);
-    // console.log("percentageDifference", percentageDifference);
-    // console.log("avgPrice", avgPrice);
-    // console.log("hours", hours);
-
     let color;
     risk < 30
       ? (color = "green")
@@ -84,13 +78,11 @@ class TicketDetailsContainer extends Component {
       ? (color = "orange")
       : (color = "red");
 
-    // console.log("color", color);
-
     return (
       <div>
-        <h2 style={{ color: color }}>
+        <h2>
           Risk: We calculated that the risk of this ticket being a fraud is{" "}
-          {risk}%
+          <b style={{ color: color }}>{risk}%</b>
         </h2>
         <TicketDetails
           ticket={currentTicket}
