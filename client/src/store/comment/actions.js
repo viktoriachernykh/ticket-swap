@@ -2,14 +2,14 @@ import request from "superagent";
 
 const baseUrl = "http://localhost:4000";
 
-export const fetchComments = currentTicketId => dispatch => {
+export const fetchComments = () => dispatch => {
   request(`${baseUrl}/comment`)
     .then(response => {
-      const allComments = response.body;
-      const currentTicketComments = allComments.filter(
-        comment => comment.ticketId === currentTicketId
-      );
-      dispatch(commentsFetched(currentTicketComments));
+      // const allComments = response.body;
+      // const currentTicketComments = allComments.filter(
+      //   comment => comment.ticketId === currentTicketId
+      // );
+      dispatch(commentsFetched(response.body));
     })
     .catch(console.error);
 };

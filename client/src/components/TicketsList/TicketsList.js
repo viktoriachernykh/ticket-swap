@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 
-import TicketsContainer from "./TicketContainer";
+import TicketLink from "./TicketLink";
 
 class TicketsList extends Component {
   render() {
     const ticketsList = this.props.currentTickets.map(ticket => (
-      <TicketsContainer
-        key={ticket.id}
-        ticket={ticket}
-        event={this.props.event}
-      />
+      <TicketLink key={ticket.id} ticket={ticket} event={this.props.event} />
     ));
 
     return (

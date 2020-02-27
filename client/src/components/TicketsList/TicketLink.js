@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 
 import { fetchComments } from "../../store/comment/actions";
 
-class TicketsContainer extends Component {
+class TicketLink extends Component {
   componentDidMount() {
-    const currentId = Number(this.props.ticket.id);
-    this.props.fetchComments(currentId);
+    this.props.fetchComments();
   }
 
   render() {
@@ -17,12 +16,16 @@ class TicketsContainer extends Component {
       user => user.id === currentTicket.userId
     );
 
+    const sameTicketComments = this.props.comments.filter(
+      c => c.ticketId === currentTicket.id
+    );
+
     const sameAuthorTickets = this.props.tickets.filter(
       ticket => ticket.userId === currentTicketAuthor.id
     );
 
     let risk = 5;
-    this.props.comments.length > 3 && (risk += 5);
+    sameTicketComments.length > 3 && (risk += 5);
     sameAuthorTickets.length === 1 && (risk += 10);
 
     const everyTicketPrice = this.props.tickets
@@ -55,14 +58,13 @@ class TicketsContainer extends Component {
       : risk < 60
       ? (color = "orange")
       : (color = "red");
-    // console.log(color);
 
     return (
       <div>
         <Link to={`/ticket/${currentTicket.id}`} style={{ color: color }}>
           <li>
-            risk = {risk}%, {currentTicket.description} FOR{" "}
-            {currentTicket.price}$
+            {currentTicket.description} FOR {currentTicket.price}$ / risk ={" "}
+            {risk}%
           </li>
         </Link>
       </div>
@@ -78,4 +80,4 @@ function mapStateToProps(state) {
     comments: state.comments
   };
 }
-export default connect(mapStateToProps, { fetchComments })(TicketsContainer);
+export default connect(mapStateToProps, { fetchComments })(TicketLink);

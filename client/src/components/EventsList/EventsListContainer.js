@@ -9,20 +9,47 @@ import EventsList from "./EventsList";
 import AddEventFormContainer from "../AddEvent/AddEventFormContainer";
 
 class EventsListContainer extends Component {
+  state = { page: 1 };
+
   componentDidMount() {
     this.props.fetchEvents();
     this.props.fetchUsers();
     this.props.fetchTickets();
   }
 
+  prevPage = () => {
+    this.state.page > 1 && this.setState({ page: this.state.page - 1 });
+  };
+
+  nextPage = () => {
+    const nextPageFirstEvent = Number(this.state.page) * 9;
+    this.props.events[nextPageFirstEvent] &&
+      this.setState({ page: this.state.page + 1 });
+  };
+
   render() {
+    const eventsPerPage = 9;
+
+    let eventsDisplayed;
+
+    this.state.page === 1
+      ? (eventsDisplayed = this.props.events.slice(0, eventsPerPage))
+      : (eventsDisplayed = this.props.events.slice(
+          (Number(this.state.page) - 1) * 9,
+          eventsPerPage * Number(this.state.page) - 1
+        ));
+
     return (
       <div>
         {/* {!this.props.events || (this.props.events.length === 0 && "Loading")} */}
         {this.props.events && this.props.events.length > 0 && (
           <div>
+            <button onClick={this.prevPage}>prev page</button>
+            <p>{this.state.page}</p>
+            <button onClick={this.nextPage}>next page</button>
             <EventsList
-              events={this.props.events}
+              events={eventsDisplayed}
+              // events={this.props.events}
               user={this.props.user}
               token={this.props.token}
             />

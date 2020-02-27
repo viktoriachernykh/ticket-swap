@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 
 export default function TicketDetails(props) {
   // console.log(props);
-
+  const start = new Date(props.event.startDate);
+  const startDate = start.toLocaleDateString();
+  const end = new Date(props.event.endDate);
+  const endDate = end.toLocaleDateString();
   return (
     <div>
       {props.ticket && (
@@ -12,7 +15,7 @@ export default function TicketDetails(props) {
           <p>
             Ticket for event:{" "}
             <Link to={`/event/${props.event.id}`} key={props.event.id}>
-              {props.event.title}, {props.event.startDate}-{props.event.endDate}{" "}
+              {props.event.title}, {startDate}-{endDate}{" "}
             </Link>
           </p>
 

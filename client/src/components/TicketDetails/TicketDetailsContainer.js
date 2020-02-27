@@ -13,8 +13,7 @@ class TicketDetailsContainer extends Component {
     toggle: false
   };
   componentDidMount() {
-    const currentId = Number(this.props.match.params.id);
-    this.props.fetchComments(currentId);
+    this.props.fetchComments();
   }
 
   toggleEditForm = () => {
@@ -38,9 +37,13 @@ class TicketDetailsContainer extends Component {
       user => user.id === currentTicket.userId
     );
 
+    const currentTicketComments = this.props.comments.filter(
+      c => c.ticketId === currentId
+    );
+
     let risk = 5;
 
-    this.props.comments.length > 3 && (risk += 5);
+    currentTicketComments.length > 3 && (risk += 5);
 
     const everyTicketPrice = this.props.tickets
       .filter(ticket => ticket.eventId === currentTicket.eventId)
@@ -88,6 +91,7 @@ class TicketDetailsContainer extends Component {
           ticket={currentTicket}
           event={currentTicketEvent}
           author={currentTicketAuthor}
+          // comments={currentTicketComments}
         />
         {this.props.user.id === currentTicket.userId && (
           <button onClick={() => this.toggleEditForm()}>Edit ticket!</button>
@@ -98,8 +102,11 @@ class TicketDetailsContainer extends Component {
             toggleForm={this.toggleEditForm}
           />
         )}
-        We have {this.props.comments.length} comments!
-        <CommentsList comments={this.props.comments} users={this.props.users} />
+        We have {currentTicketComments.length} comments!
+        <CommentsList
+          comments={currentTicketComments}
+          users={this.props.users}
+        />
         {this.props.token && <AddCommentFormContainer ticket={currentTicket} />}
       </div>
     );
@@ -111,8 +118,8 @@ function mapStateToProps(state) {
   return {
     events: state.events,
     tickets: state.tickets,
-    comments: state.comments,
     users: state.users,
+    comments: state.comments,
     user: state.session.user,
     token: state.session.jwt
   };
