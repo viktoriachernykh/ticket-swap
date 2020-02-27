@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const Comment = require("./model");
+const { auth } = require("../authentication/authMiddleware");
 const router = new Router();
 
-router.post("/comment", async (req, res, next) => {
+router.post("/comment", auth, async (req, res, next) => {
   try {
     const comment = await Comment.create(req.body);
     res.send(comment);

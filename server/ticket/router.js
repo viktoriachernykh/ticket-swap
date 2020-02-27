@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const Ticket = require("./model");
+const { auth } = require("../authentication/authMiddleware");
 const router = new Router();
 
-router.post("/ticket", async (req, res, next) => {
+router.post("/ticket", auth, async (req, res, next) => {
   try {
     const ticket = await Ticket.create(req.body);
     res.send(ticket);
