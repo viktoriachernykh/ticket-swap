@@ -2,17 +2,15 @@ const { Router } = require("express");
 const User = require("../user/model");
 const bcrypt = require("bcrypt");
 const { toJWT } = require("./jwt");
-// const { toJWT, toData } = require("./jwt");
 
 const router = new Router();
 
 router.post("/login", async (req, res, next) => {
-  // console.log(req);
   const { email, password } = req.body;
   if (!email || !password) {
     res
       .status(401)
-      .send({ message: "Provide valid email and password" }) // 400 or 401 ?
+      .send({ message: "Provide valid email and password" })
       .end();
   }
   try {
@@ -42,10 +40,6 @@ router.post("/login", async (req, res, next) => {
         .end();
     }
   } catch (error) {
-    // console.error(err);
-    // res.status(500).send({
-    //   message: "Something went wrong"
-    // });
     next(error);
   }
 });

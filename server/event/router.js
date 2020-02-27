@@ -37,39 +37,4 @@ router.get("/event/:id", async (req, res, next) => {
   }
 });
 
-// router.patch("/event/:id", async (req, res, next) => {
-//   const ticketId = req.params.id;
-//   try {
-//     await Event.update(req.body, {
-//       where: {
-//         id: ticketId
-//       }
-//     });
-//     const updatedEvent = await Event.findByPk(eventId);
-//     if (!updatedEvent) {
-//       res
-//         .status(404)
-//         .send({ message: "Event not found" })
-//         .end();
-//     }
-//     res.send(updatedEvent);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-// router.delete("/event/:id", async (req, res, next) => {
-//   const eventId = req.params.id;
-//   try {
-//     await Event.destroy({
-//       where: {
-//         id: eventId
-//       }
-//     });
-//     res.send({ message: "Event deleted" });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 module.exports = router;

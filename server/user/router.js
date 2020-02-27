@@ -3,7 +3,6 @@ const User = require("./model");
 const bcrypt = require("bcrypt");
 const router = new Router();
 
-// http :4000/user name=1 email=1 password=1
 router.post("/user", async (req, res, next) => {
   const { name, email, password, logo } = req.body;
   if (!name || !email || !password) {
@@ -53,48 +52,6 @@ router.get("/user/:id", async (req, res, next) => {
         .end();
     }
     res.send(user);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.patch("/user/:id", async (req, res, next) => {
-  const userId = req.params.id;
-  const { name, email, password, logo } = req.body;
-  try {
-    const user = {
-      name: name,
-      email: email,
-      password: bcrypt.hashSync(password, 10),
-      logo: logo
-    };
-    const updateUser = await User.update(user, {
-      where: {
-        id: userId
-      }
-    });
-    const updatedUser = await User.findByPk(userId);
-    if (!updatedUser) {
-      res
-        .status(404)
-        .send({ message: "User not found" })
-        .end();
-    }
-    res.send(updatedUser);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.delete("/user/:id", async (req, res, next) => {
-  const userId = req.params.id;
-  try {
-    await User.destroy({
-      where: {
-        id: userId
-      }
-    });
-    res.send({ message: "User deleted" });
   } catch (error) {
     next(error);
   }

@@ -37,39 +37,4 @@ router.get("/comment/:id", async (req, res, next) => {
   }
 });
 
-// router.patch("/comment/:id", async (req, res, next) => {
-//   const commentId = req.params.id;
-//   try {
-//     await Comment.update(req.body, {
-//       where: {
-//         id: commentId
-//       }
-//     });
-//     const updatedComment = await Comment.findByPk(commentId);
-//     if (!updatedComment) {
-//       res
-//         .status(404)
-//         .send({ message: "Comment doesn't exist" })
-//         .end();
-//     }
-//     res.send(updatedComment);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-// router.delete("/comment/:id", async (req, res, next) => {
-//   const commentId = req.params.id;
-//   try {
-//     await Comment.destroy({
-//       where: {
-//         id: commentId
-//       }
-//     });
-//     res.send({ message: "Comment deleted" });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 module.exports = router;
