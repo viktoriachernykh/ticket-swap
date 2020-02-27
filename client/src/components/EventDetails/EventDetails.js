@@ -13,7 +13,7 @@ export default function EventDetails(props) {
           {props.event.picture ? (
             <img src={props.event.picture} alt="event" />
           ) : (
-            <img src={`/img/a${props.event.id}.jpg`} alt="event" />
+            <img src={`/img/a${props.event.id}.jpeg`} alt="event" />
           )}
           <h2>{props.event.title}</h2>
           <p>{props.event.description}</p>

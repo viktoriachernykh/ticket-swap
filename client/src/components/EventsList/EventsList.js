@@ -11,7 +11,11 @@ export default function EventsList(props) {
       const endDate = end.toLocaleDateString();
       return (
         <Link to={`/event/${event.id}`} key={event.id} className="eventLink">
-          <img src={`/img/a${event.id}.jpg`} alt="event" />
+          {event.picture ? (
+            <img src={event.picture} alt="event" />
+          ) : (
+            <img src={`/img/a${event.id}.jpeg`} alt="event" />
+          )}{" "}
           <br />
           {event.title} <br />
           {startDate} - {endDate}
