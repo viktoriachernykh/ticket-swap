@@ -16,7 +16,7 @@ export default function TicketDetails(props) {
               {props.event.title}, {startDate}-{endDate}{" "}
             </Link>
           </p>
-          <h2>Price: {props.ticket.price}</h2>
+          <h2>Price: {props.ticket.price}$</h2>
           <p>{props.ticket.description}</p>
           <em>Posted by {props.author.name}</em>
         </div>
