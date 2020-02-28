@@ -29,7 +29,6 @@ class SignupFormContainer extends React.Component {
 
   render() {
     if (Object.keys(this.props.user).length) {
-      // console.log(this.props);
       setTimeout(() => {
         this.props.history.push("/login");
       }, 500);
