@@ -2,7 +2,7 @@
 
 This app is a TicketSwap clone - a full-stack app for reselling tickets for different events.
 - Any user can see events and tickets with fraud risk percentage.
-- Only logged in user can add events and tickets. 
+- Logged in user can add events and tickets. 
 - Fraud risk gets constantly renewed based on ticket price, its time added, its seller activity, etc.
 - User can choose the ticket considering fraud risk percentage.
 
